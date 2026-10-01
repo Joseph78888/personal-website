@@ -1,173 +1,73 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Theme Toggle Logic
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const htmlElement = document.documentElement;
-    const themeIcon = themeToggleBtn.querySelector('i');
-
-    // Check local storage for saved theme
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    htmlElement.setAttribute('data-theme', savedTheme);
-    updateThemeIcon(savedTheme);
-
-    themeToggleBtn.addEventListener('click', () => {
-        const currentTheme = htmlElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        
-        htmlElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeIcon(newTheme);
-    });
-
-    function updateThemeIcon(theme) {
-        if (theme === 'dark') {
-            themeIcon.className = 'fa-solid fa-sun';
-        } else {
-            themeIcon.className = 'fa-solid fa-moon';
-        }
-    }
-
-    // 2. Mobile Menu Toggle
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
-
-    // Close menu when link is clicked
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-        });
-    });
-
-    // 3. Sticky Nav Background & Active Link Highlighting
-    const navbar = document.getElementById('navbar');
-    const sections = document.querySelectorAll('section');
-    const navItems = document.querySelectorAll('.nav-links a');
-
-    window.addEventListener('scroll', () => {
-        // Sticky Nav styling
-        if (window.scrollY > 50) {
-            navbar.style.background = 'var(--glass-bg)';
-            navbar.style.boxShadow = 'var(--glass-shadow)';
-        } else {
-            navbar.style.background = 'transparent';
-            navbar.style.boxShadow = 'none';
-        }
-
-        // Active Link Highlighting
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (scrollY >= (sectionTop - 200)) {
-                current = section.getAttribute('id');
-            }
-        });
-
-        navItems.forEach(item => {
-            item.classList.remove('active');
-            if (item.getAttribute('href') === `#${current}`) {
-                item.classList.add('active');
-            }
-        });
-    });
-
-    // 4. Scroll Reveal Animations (Intersection Observer)
-    const reveals = document.querySelectorAll('.reveal');
-    const revealOptions = {
-        threshold: 0.15,
-        rootMargin: "0px 0px -50px 0px"
-    };
-
-    const revealOnScroll = new IntersectionObserver(function(entries, observer) {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) {
-                return;
-            } else {
-                entry.target.classList.add('active');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, revealOptions);
-
-    reveals.forEach(reveal => {
-        revealOnScroll.observe(reveal);
-    });
-
-    // 5. Project Filtering
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Remove active class from all
-            filterBtns.forEach(b => b.classList.remove('active'));
-            // Add active to clicked
-            btn.classList.add('active');
-
-            const filterValue = btn.getAttribute('data-filter');
-
-            projectCards.forEach(card => {
-                if (filterValue === 'all' || card.getAttribute('data-category').includes(filterValue)) {
-                    card.style.display = 'flex';
-                    setTimeout(() => card.style.opacity = '1', 10);
-                } else {
-                    card.style.opacity = '0';
-                    setTimeout(() => card.style.display = 'none', 300);
-                }
-            });
-        });
-    });
-
-    // 6. Copy Email to Clipboard
-    const emailBtn = document.getElementById('email-btn');
-    const copyBadge = document.querySelector('.copy-badge');
-
-    emailBtn.addEventListener('click', () => {
-        const email = 'yousifkhalid544@gmail.com';
-        navigator.clipboard.writeText(email).then(() => {
-            copyBadge.classList.add('show');
-            setTimeout(() => {
-                copyBadge.classList.remove('show');
-            }, 2000);
-        });
-    });
-
-    // 7. Contact Form Mock Submission
-    const contactForm = document.getElementById('contactForm');
-    const formSuccess = document.getElementById('formSuccess');
-
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        // Here you would normally send the data via fetch/XHR to a backend
-        
-        // Show success state
-        contactForm.style.display = 'none';
-        formSuccess.classList.add('show');
-
-        // Optional: Reset form after some time and show it again
-        setTimeout(() => {
-            contactForm.reset();
-            contactForm.style.display = 'flex';
-            formSuccess.classList.remove('show');
-        }, 5000);
-    });
-
-    // 8. Parallax Orbs Effect (Desktop only)
-    if (window.innerWidth > 768) {
-        document.addEventListener('mousemove', (e) => {
-            const orbs = document.querySelectorAll('.orb');
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-
-            orbs.forEach((orb, index) => {
-                const speed = (index + 1) * 20;
-                const xOffset = (window.innerWidth / 2 - e.pageX) / speed;
-                const yOffset = (window.innerHeight / 2 - e.pageY) / speed;
-                orb.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
-            });
-        });
-    }
-});
+'use strict';
+const pair=(en,ar)=>({en,ar});
+const projects=[
+{id:'noor',title:pair('NOOR Commerce','NOOR للتجارة'),category:'systems',type:pair('CLIENT PROJECT / COMMERCE','مشروع عميل / تجارة'),status:pair('Active development','قيد التطوير'),image:null,style:'noor-media',stack:'Flutter · Supabase · Firebase',desc:pair('A connected shopping ecosystem: customer app, vendor workspace, and administration tools.','منظومة تسوق مترابطة: تطبيق العملاء، ومساحة التجار، وأدوات الإدارة.'),problem:pair('Connect shopping, multi-vendor orders, and Noor-managed delivery in a single operational system.','ربط التسوق وطلبات التجار المتعددين والتوصيل الذي تديره نور في نظام تشغيلي واحد.'),role:pair('Mobile and dashboard engineering, backend integration, and product architecture.','هندسة تطبيق الهاتف ولوحة الإدارة، وربط الخلفية، وتصميم بنية المنتج.'),features:[pair('Customer shopping, cart, checkout, and order history.','تسوق العملاء والسلة وإتمام الطلب وسجل الطلبات.'),pair('Vendor product management and order preparation, with customer information kept out of vendor views.','إدارة منتجات التجار وتجهيز الطلبات، مع حماية معلومات العملاء من واجهات التجار.'),pair('Administration and delivery roles, notifications, coupons, and bilingual interfaces.','أدوار الإدارة والتوصيل، والإشعارات، والكوبونات، والواجهات ثنائية اللغة.')],note:pair('An active client engagement. Public launch and business outcome metrics are not claimed here.','مشروع عميل نشط. لا تُعرض هنا ادعاءات بإطلاق عام أو نتائج تجارية رقمية.'),url:'https://github.com/Joseph78888/noor-admin-dashboard'},
+{id:'crop',title:pair('Crop Care','Crop Care'),category:'ai',type:pair('ACADEMIC PROJECT / EDGE AI','مشروع أكاديمي / ذكاء اصطناعي'),status:pair('Graduation project','مشروع تخرج'),image:'crop_care.webp',style:'crop-media',stack:'Flutter · Riverpod · TensorFlow Lite',desc:pair('Tomato leaf disease identification, with model inference running on the phone.','التعرف على أمراض أوراق الطماطم، مع تشغيل النموذج على الهاتف.'),problem:pair('Make a trained crop disease classifier usable through a mobile experience, without relying on a cloud request for every inference.','إتاحة نموذج تصنيف أمراض المحاصيل عبر تجربة هاتف، دون الاعتماد على طلب سحابي لكل عملية تحليل.'),role:pair('Flutter mobile application and model integration, working alongside teammates responsible for the AI model.','تطبيق Flutter وربط النموذج، بالتعاون مع أعضاء الفريق المسؤولين عن نموذج الذكاء الاصطناعي.'),features:[pair('MobileNetV2 model integration through TensorFlow Lite.','ربط نموذج MobileNetV2 عبر TensorFlow Lite.'),pair('Image capture, analysis results, history, and capture guidance.','التقاط الصور ونتائج التحليل والسجل وإرشادات التصوير.'),pair('Riverpod state management and a separate AI assistant experience.','إدارة الحالة عبر Riverpod وتجربة مساعد ذكاء اصطناعي منفصلة.')],note:pair('Academic research and a mobile implementation. The app presentation is reused from the original portfolio.','بحث أكاديمي وتنفيذ لتطبيق هاتف. الصورة المعروضة مأخوذة من ملف الأعمال الأصلي.'),url:'https://github.com/Joseph78888/Crop-Care-App'},
+{id:'manga',title:pair('Super Manga','Super Manga'),category:'systems',type:pair('INDEPENDENT PROJECT / INFRASTRUCTURE','مشروع مستقل / بنية تحتية'),status:pair('Engineering project','مشروع تقني'),image:'super_manga.webp',style:'system-media',stack:'Python · Docker · Nginx · Linux',desc:pair('Content delivery infrastructure for organizing and serving hierarchical static assets.','بنية توزيع محتوى لتنظيم وتقديم الملفات الثابتة ذات البنية الهرمية.'),problem:pair('Organize a large content structure and serve static assets through a manageable delivery system.','تنظيم محتوى ذي بنية كبيرة وتقديم الملفات الثابتة عبر نظام توزيع قابل للإدارة.'),role:pair('Python orchestration and a Dockerized Nginx setup on a Linux VPS.','تنسيق العمليات باستخدام Python وإعداد Nginx داخل Docker على خادم Linux.'),features:[pair('Automated content organization and serving.','تنظيم وتقديم المحتوى آليًا.'),pair('Containerized infrastructure for repeatable configuration.','بنية داخل حاويات لتكرار الإعداد بصورة ثابتة.'),pair('A separation between content workflows and the delivery layer.','فصل عمليات إدارة المحتوى عن طبقة التوزيع.')],note:pair('The architecture illustration is from the original portfolio; it is not a live service screenshot.','الرسم المعماري من ملف الأعمال الأصلي؛ وهو ليس لقطة لخدمة حية.'),url:'https://github.com/Joseph78888/super_manga'},
+{id:'scholarship',title:pair('Scholarship Initiative','مبادرة المنح الدراسية'),category:'mobile',type:pair('INDEPENDENT INITIATIVE / EDUCATION','مبادرة مستقلة / تعليم'),status:pair('MVP planning','تخطيط المنتج الأولي'),image:'scholarship.webp',style:'scholarship-media',stack:'Flutter · Dart · Product discovery',desc:pair('An initiative to help Sudanese students discover and verify educational opportunities.','مبادرة تساعد الطلاب السودانيين على اكتشاف الفرص التعليمية والتحقق منها.'),problem:pair('Reduce the difficulty of finding relevant, trustworthy scholarship information.','تقليل صعوبة العثور على معلومات منح دراسية ملائمة وموثوقة.'),role:pair('MVP architecture, user persona definition, and a data verification strategy.','تصميم بنية المنتج الأولي، وتحديد شخصيات المستخدمين، ووضع استراتيجية للتحقق من البيانات.'),features:[pair('Define the first useful scope for students.','تحديد النطاق الأول المفيد للطلاب.'),pair('Plan opportunity discovery and verification workflows.','تخطيط مسارات اكتشاف الفرص والتحقق منها.'),pair('Create a foundation for a Flutter mobile product.','تأسيس بنية لمنتج هاتف باستخدام Flutter.')],note:pair('An early initiative. The visual is a concept illustration from the original portfolio.','مبادرة مبكرة. الصورة رسم تصوري من ملف الأعمال الأصلي.'),url:'https://github.com/Joseph78888/SU-Scholarship-'}
+];
+const services=[
+[pair('Mobile products','تطبيقات الهاتف'),pair('Flutter applications shaped around real user journeys, with maintainable architecture and clear state management.','تطبيقات Flutter مبنية حول رحلات المستخدم الفعلية، ببنية قابلة للصيانة وإدارة واضحة للحالة.'),['Flutter','Dart','Riverpod','Bloc']],
+[pair('Connected business systems','أنظمة أعمال مترابطة'),pair('Customer apps, vendor tools, administration dashboards, and backend workflows that work together.','تطبيقات عملاء، وأدوات تجار، ولوحات إدارة، وعمليات خلفية تعمل معًا.'),['Supabase','PostgreSQL','Firebase']],
+[pair('On-device AI','الذكاء الاصطناعي على الجهاز'),pair('Bring trained models into a mobile app, with practical attention to inference, usability, and offline operation.','دمج النماذج المدربة في تطبيقات الهاتف، مع الاهتمام بالتشغيل وسهولة الاستخدام والعمل دون اتصال.'),['TensorFlow Lite','Model integration']],
+[pair('Architecture & product delivery','البنية وتسليم المنتج'),pair('Turn a feature list into a coherent system, improve an existing codebase, and establish a repeatable release workflow.','تحويل قائمة ميزات إلى نظام متكامل، وتحسين الكود القائم، وتأسيس مسار إصدارات قابل للتكرار.'),['Clean Architecture','GitHub Actions','CI/CD']]
+];
+const experience=[
+[pair('December 2024 — Present','ديسمبر 2024 — الآن'),pair('Independent developer','مطوّر مستقل'),pair('End-to-end development across mobile apps and operational tools, including lab management and ChillBiz Tracker.','تطوير متكامل لتطبيقات الهاتف وأدوات التشغيل، بما فيها إدارة المختبرات وChillBiz Tracker.')],
+[pair('May 2026','مايو 2026'),pair('Project leadership','قيادة المشاريع'),pair('Developer and designer recruitment, technical foundations, and team structure for a Sudan-focused commerce platform.','استقطاب مطوّرين ومصمّمين، ووضع الأسس التقنية وبنية الفريق لمنصة تجارة تستهدف السودان.')],
+[pair('May 2026','مايو 2026'),pair('Community & mentoring','المجتمع والإرشاد'),pair('Technical presentations and knowledge sharing with the local developer community.','عروض تقنية ومشاركة المعرفة مع مجتمع المطوّرين المحلي.')]
+];
+const processes=[
+[pair('Understand','نفهم'),pair('Define the business problem, users, constraints, and a useful first scope.','نحدد مشكلة العمل والمستخدمين والقيود ونطاقًا أوليًا مفيدًا.')],
+[pair('Design the system','نصمم النظام'),pair('Map user journeys, interface decisions, data, and responsibilities before implementation.','نرسم رحلات المستخدم وقرارات الواجهة والبيانات والمسؤوليات قبل التنفيذ.')],
+[pair('Build & validate','نبني ونختبر'),pair('Develop in reviewable steps. Test behavior, devices, and the workflows that matter.','نطوّر بخطوات قابلة للمراجعة، ونختبر السلوك والأجهزة ومسارات العمل المهمة.')],
+[pair('Release & evolve','نطلق ونطوّر'),pair('Prepare deployment, document the system, and plan the next iteration with you.','نجهز النشر ونوثق النظام ونخطط معك للتطوير القادم.')]
+];
+const labs=[
+[pair('Fuel quota system','نظام حصص الوقود'),pair('Proposal & discovery','مقترح واستكشاف'),pair('Vehicle-based fuel allowances, station verification, and operations oversight for transport businesses.','حصص وقود مرتبطة بالمركبات، والتحقق في المحطات، والإشراف التشغيلي لأعمال النقل.'),pair('TRANSPORT / OPERATIONS','النقل / العمليات')],
+[pair('Local services marketplace','سوق الخدمات المحلية'),pair('Product discovery','استكشاف المنتج'),pair('Connecting customers with craftsmen and workers through a clearer request and service workflow.','ربط العملاء بالحرفيين والعمال عبر مسار أوضح لطلب الخدمة وتنفيذها.'),pair('MARKETPLACE / SERVICES','سوق / خدمات')],
+[pair('Medical apparel store','متجر الملابس الطبية'),pair('Requirements exploration','استكشاف المتطلبات'),pair('Exploring online retail for lab coats and scrubs across Egypt and Sudan.','استكشاف البيع الإلكتروني للابكوت والملابس الطبية في مصر والسودان.'),pair('COMMERCE / REGIONAL MARKETS','تجارة / أسواق إقليمية')]
+];
+const faqs=[
+[pair('Can we start with just an idea?','هل يمكن البدء بفكرة فقط؟'),pair('Yes. Start with the problem, who experiences it, and what you want to achieve. Discovery helps define a sensible first version before committing to a large scope.','نعم. نبدأ بالمشكلة ومن يواجهها وما تريد تحقيقه. يساعد الاستكشاف في تحديد نسخة أولى مناسبة قبل الالتزام بنطاق كبير.')],
+[pair('Can you work on an existing app?','هل يمكنك العمل على تطبيق قائم؟'),pair('Yes. I can review the architecture and current behavior, identify priorities, and plan targeted improvements with you.','نعم. أراجع البنية والسلوك الحالي، وأحدد الأولويات، وأخطط معك لتحسينات محددة.')],
+[pair('How are timelines and budgets decided?','كيف تُحدد المدة والميزانية؟'),pair('They depend on scope, integrations, design readiness, and delivery requirements. We agree on milestones and responsibilities after reviewing the project.','تعتمد على النطاق والتكاملات وجاهزية التصميم ومتطلبات التسليم. نتفق على المراحل والمسؤوليات بعد مراجعة المشروع.')],
+[pair('Will I work directly with you?','هل سأعمل معك مباشرة؟'),pair('Yes. This is an independent, founder-led studio. You work directly with me; any additional collaboration is discussed for your project.','نعم. هذا استوديو مستقل بقيادة مؤسسه. تعمل معي مباشرة، ونناقش أي تعاون إضافي يحتاجه مشروعك.')]
+];
+let lang='en',filter='all',activeProject=null;
+const $=id=>document.getElementById(id),t=v=>v[lang],esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const readPref=k=>{try{return localStorage.getItem(k)}catch{return null}},writePref=(k,v)=>{try{localStorage.setItem(k,v)}catch{}};
+function renderProjects(){
+ const options=[['all',pair('All work','كل الأعمال')],['mobile',pair('Mobile apps','تطبيقات الهاتف')],['systems',pair('Business & systems','أعمال وأنظمة')],['ai',pair('On-device AI','ذكاء اصطناعي')]];
+ $('filters').innerHTML=options.map(([id,label])=>`<button data-filter="${id}" aria-pressed="${filter===id}">${esc(t(label))}</button>`).join('');
+ $('projects').innerHTML=projects.filter(p=>filter==='all'||p.category===filter||(filter==='mobile'&&['noor','crop'].includes(p.id))).map(p=>`<article class="project-card"><div class="project-media ${p.style}">${p.image?`<img src="assets/images/${p.image}" alt="${esc(t(p.title))}" loading="lazy" width="720" height="420">`:`<div class="noor-brand">NOOR<small>${lang==='en'?'Customer · Vendor · Administration':'العملاء · التجار · الإدارة'}</small></div>`}<span class="status">${esc(t(p.status))}</span></div><div class="project-meta"><span>${esc(t(p.type))}</span></div><h3>${esc(t(p.title))}</h3><p>${esc(t(p.desc))}</p><button class="text-button" data-project="${p.id}">${lang==='en'?'Explore project':'استكشف المشروع'}</button></article>`).join('');
+}
+function renderAll(){
+ document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+ document.querySelectorAll('[data-en][data-ar]').forEach(el=>el.textContent=el.dataset[lang]);
+ $('language').textContent=lang==='en'?'عربي':'EN';$('language').lang=lang==='en'?'ar':'en';$('language').ariaLabel=lang==='en'?'Switch to Arabic':'التبديل إلى الإنجليزية';
+ document.title=lang==='en'?'Yousif Joseph | Software Studio & Portfolio':'يوسف جوزيف | استوديو برمجيات وأعمال';
+ $('filters').ariaLabel=lang==='en'?'Filter projects':'تصفية المشاريع';$('close-dialog').ariaLabel=lang==='en'?'Close project details':'إغلاق تفاصيل المشروع';
+ renderProjects();
+ $('service-list').innerHTML=services.map(([title,desc,tags],i)=>`<article class="service-card"><span class="service-number">0${i+1}</span><h3>${esc(t(title))}</h3><p>${esc(t(desc))}</p><div class="tags">${tags.map(tag=>`<span>${esc(tag)}</span>`).join('')}</div></article>`).join('');
+ $('experience').innerHTML=experience.map(([date,title,desc])=>`<article class="experience-item"><span class="date">${esc(t(date))}</span><h3>${esc(t(title))}</h3><p>${esc(t(desc))}</p></article>`).join('');
+ $('process-list').innerHTML=processes.map(([title,desc],i)=>`<article class="process-card"><span>0${i+1}</span><h3>${esc(t(title))}</h3><p>${esc(t(desc))}</p></article>`).join('');
+ $('lab-list').innerHTML=labs.map(([title,status,desc,type])=>`<article class="lab-card"><span class="lab-status">${esc(t(status))}</span><h3>${esc(t(title))}</h3><p>${esc(t(desc))}</p><div class="lab-type">${esc(t(type))}</div></article>`).join('');
+ $('faq-list').innerHTML=faqs.map(([q,a])=>`<details><summary>${esc(t(q))}</summary><p>${esc(t(a))}</p></details>`).join('');
+ if(activeProject)renderDialog(activeProject);updateThemeLabel();
+}
+function renderDialog(p){
+ const block=(title,body)=>`<div class="detail-block"><h3>${title}</h3>${body}</div>`;
+ $('dialog-content').innerHTML=`<p class="dialog-kicker">${esc(t(p.type))} · ${esc(t(p.status))}</p><h2 id="dialog-title">${esc(t(p.title))}</h2><p>${esc(t(p.desc))}</p>${block(lang==='en'?'The challenge':'التحدي',`<p>${esc(t(p.problem))}</p>`)}${block(lang==='en'?'My role':'دوري',`<p>${esc(t(p.role))}</p>`)}${block(lang==='en'?'What the work covers':'ما يشمله العمل',`<ul>${p.features.map(f=>`<li>${esc(t(f))}</li>`).join('')}</ul>`)}${block(lang==='en'?'Technology & stage':'التقنيات والمرحلة',`<p dir="ltr">${esc(p.stack)}</p><p>${esc(t(p.note))}</p>`)}<a class="button secondary" href="${p.url}" target="_blank" rel="noopener noreferrer">${lang==='en'?'View repository on GitHub':'عرض المستودع على GitHub'}</a>`;
+}
+$('filters').addEventListener('click',e=>{const b=e.target.closest('[data-filter]');if(!b)return;filter=b.dataset.filter;renderProjects();$('filters').querySelector(`[data-filter="${filter}"]`).focus()});
+$('projects').addEventListener('click',e=>{const b=e.target.closest('[data-project]');if(!b)return;activeProject=projects.find(p=>p.id===b.dataset.project);renderDialog(activeProject);$('project-dialog').showModal();document.body.style.overflow='hidden'});
+$('close-dialog').addEventListener('click',()=>$('project-dialog').close());$('project-dialog').addEventListener('click',e=>{if(e.target===$('project-dialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close()}});$('project-dialog').addEventListener('close',()=>{activeProject=null;document.body.style.overflow=''});
+$('language').addEventListener('click',()=>{lang=lang==='en'?'ar':'en';writePref('portfolio-language',lang);$('copy-status').textContent='';renderAll()});
+function updateThemeLabel(){const dark=document.documentElement.dataset.theme==='dark';$('theme').ariaLabel=lang==='en'?(dark?'Switch to light theme':'Switch to dark theme'):(dark?'تفعيل المظهر الفاتح':'تفعيل المظهر الداكن')}
+$('theme').addEventListener('click',()=>{document.documentElement.dataset.theme=document.documentElement.dataset.theme==='dark'?'light':'dark';writePref('portfolio-theme',document.documentElement.dataset.theme);updateThemeLabel()});
+$('menu').addEventListener('click',()=>{const expanded=$('menu').getAttribute('aria-expanded')==='true';$('menu').setAttribute('aria-expanded',String(!expanded));$('nav-links').classList.toggle('open',!expanded)});
+$('nav-links').addEventListener('click',e=>{if(e.target.closest('a')){$('menu').setAttribute('aria-expanded','false');$('nav-links').classList.remove('open')}});document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('menu').setAttribute('aria-expanded','false');$('nav-links').classList.remove('open')}});
+$('copy-email').addEventListener('click',async()=>{try{await navigator.clipboard.writeText('yousifkhalid544@gmail.com');$('copy-status').textContent=lang==='en'?'Email copied.':'تم نسخ البريد.'}catch{$('copy-status').textContent=lang==='en'?'Select the email above to copy it.':'حدد البريد أعلاه لنسخه.'}});
+$('contact-form').addEventListener('submit',e=>{e.preventDefault();const name=$('name').value.trim(),email=$('email').value.trim(),message=$('message').value.trim();if(!name||!message)return;const subject=lang==='en'?`Project enquiry from ${name}`:`استفسار مشروع من ${name}`;const body=`${name}\n${email}\n\n${message}`;window.location.href=`mailto:yousifkhalid544@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`});
+lang=readPref('portfolio-language')==='ar'?'ar':'en';document.documentElement.dataset.theme=readPref('portfolio-theme')==='dark'?'dark':'light';renderAll();
