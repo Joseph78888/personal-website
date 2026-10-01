@@ -7,15 +7,12 @@ const projects=[
 {id:'scholarship',title:pair('Scholarship Initiative','مبادرة المنح الدراسية'),category:'mobile',type:pair('INDEPENDENT INITIATIVE / EDUCATION','مبادرة مستقلة / تعليم'),status:pair('MVP planning','تخطيط المنتج الأولي'),image:'scholarship.webp',style:'scholarship-media',stack:'Flutter · Dart · Product discovery',desc:pair('An initiative to help Sudanese students discover and verify educational opportunities.','مبادرة تساعد الطلاب السودانيين على اكتشاف الفرص التعليمية والتحقق منها.'),problem:pair('Reduce the difficulty of finding relevant, trustworthy scholarship information.','تقليل صعوبة العثور على معلومات منح دراسية ملائمة وموثوقة.'),role:pair('MVP architecture, user persona definition, and a data verification strategy.','تصميم بنية المنتج الأولي، وتحديد شخصيات المستخدمين، ووضع استراتيجية للتحقق من البيانات.'),features:[pair('Define the first useful scope for students.','تحديد النطاق الأول المفيد للطلاب.'),pair('Plan opportunity discovery and verification workflows.','تخطيط مسارات اكتشاف الفرص والتحقق منها.'),pair('Create a foundation for a Flutter mobile product.','تأسيس بنية لمنتج هاتف باستخدام Flutter.')],note:pair('An early initiative. The visual is a concept illustration from the original portfolio.','مبادرة مبكرة. الصورة رسم تصوري من ملف الأعمال الأصلي.'),url:'https://github.com/Joseph78888/SU-Scholarship-'}
 ];
 const services=[
-[pair('Mobile products','تطبيقات الهاتف'),pair('Flutter applications shaped around real user journeys, with maintainable architecture and clear state management.','تطبيقات Flutter مبنية حول رحلات المستخدم الفعلية، ببنية قابلة للصيانة وإدارة واضحة للحالة.'),['Flutter','Dart','Riverpod','Bloc']],
-[pair('Connected business systems','أنظمة أعمال مترابطة'),pair('Customer apps, vendor tools, administration dashboards, and backend workflows that work together.','تطبيقات عملاء، وأدوات تجار، ولوحات إدارة، وعمليات خلفية تعمل معًا.'),['Supabase','PostgreSQL','Firebase']],
-[pair('On-device AI','الذكاء الاصطناعي على الجهاز'),pair('Bring trained models into a mobile app, with practical attention to inference, usability, and offline operation.','دمج النماذج المدربة في تطبيقات الهاتف، مع الاهتمام بالتشغيل وسهولة الاستخدام والعمل دون اتصال.'),['TensorFlow Lite','Model integration']],
-[pair('Architecture & product delivery','البنية وتسليم المنتج'),pair('Turn a feature list into a coherent system, improve an existing codebase, and establish a repeatable release workflow.','تحويل قائمة ميزات إلى نظام متكامل، وتحسين الكود القائم، وتأسيس مسار إصدارات قابل للتكرار.'),['Clean Architecture','GitHub Actions','CI/CD']]
-];
-const experience=[
-[pair('December 2024 — Present','ديسمبر 2024 — الآن'),pair('Independent developer','مطوّر مستقل'),pair('End-to-end development across mobile apps and operational tools, including lab management and ChillBiz Tracker.','تطوير متكامل لتطبيقات الهاتف وأدوات التشغيل، بما فيها إدارة المختبرات وChillBiz Tracker.')],
-[pair('May 2026','مايو 2026'),pair('Project leadership','قيادة المشاريع'),pair('Developer and designer recruitment, technical foundations, and team structure for a Sudan-focused commerce platform.','استقطاب مطوّرين ومصمّمين، ووضع الأسس التقنية وبنية الفريق لمنصة تجارة تستهدف السودان.')],
-[pair('May 2026','مايو 2026'),pair('Community & mentoring','المجتمع والإرشاد'),pair('Technical presentations and knowledge sharing with the local developer community.','عروض تقنية ومشاركة المعرفة مع مجتمع المطوّرين المحلي.')]
+[pair('Mobile app development','تطوير تطبيقات الهاتف'),pair('Cross-platform Flutter products with a considered user experience and a maintainable foundation.','منتجات Flutter متعددة المنصات بتجربة استخدام مدروسة وأساس قابل للصيانة.'),['Flutter','iOS & Android','Riverpod / Bloc']],
+[pair('Business platforms & systems','منصات وأنظمة الأعمال'),pair('Customer apps, administration tools, and backend workflows designed to operate together.','تطبيقات العملاء وأدوات الإدارة والعمليات الخلفية، مصممة لتعمل معًا.'),['Commerce','Operations','Supabase / Firebase']],
+[pair('Product design & user journeys','تصميم المنتجات ورحلات المستخدم'),pair('Clarify the flow, define the interface, and connect design decisions to the job your customer needs to do.','توضيح المسار وتحديد الواجهة وربط قرارات التصميم بما يحتاجه عميلك.'),['User flows','Interface design','Product scope']],
+[pair('MVP planning & delivery','تخطيط وتسليم المنتج الأولي'),pair('Find the smallest useful product, agree on milestones, and build a first version you can learn from.','تحديد أصغر منتج مفيد، والاتفاق على المراحل، وبناء نسخة أولى للتعلم منها.'),['Discovery','Feasibility','Iterative releases']],
+[pair('On-device AI integration','دمج الذكاء الاصطناعي على الجهاز'),pair('Bring trained models into practical mobile experiences with attention to inference and offline use.','دمج النماذج المدربة في تجارب هاتف عملية مع الاهتمام بالتشغيل والاستخدام دون اتصال.'),['TensorFlow Lite','Model integration','Edge AI']],
+[pair('A strong foundation for what comes next.','أساس قوي لما يأتي بعده.'),pair('Clean architecture, clear responsibilities, and a release workflow that supports the next phase of your product.','بنية نظيفة، ومسؤوليات واضحة، ومسار إصدار يدعم المرحلة القادمة من منتجك.'),['Architecture','CI/CD','Documentation']]
 ];
 const processes=[
 [pair('Understand','نفهم'),pair('Define the business problem, users, constraints, and a useful first scope.','نحدد مشكلة العمل والمستخدمين والقيود ونطاقًا أوليًا مفيدًا.')],
@@ -30,9 +27,9 @@ const labs=[
 ];
 const faqs=[
 [pair('Can we start with just an idea?','هل يمكن البدء بفكرة فقط؟'),pair('Yes. Start with the problem, who experiences it, and what you want to achieve. Discovery helps define a sensible first version before committing to a large scope.','نعم. نبدأ بالمشكلة ومن يواجهها وما تريد تحقيقه. يساعد الاستكشاف في تحديد نسخة أولى مناسبة قبل الالتزام بنطاق كبير.')],
-[pair('Can you work on an existing app?','هل يمكنك العمل على تطبيق قائم؟'),pair('Yes. I can review the architecture and current behavior, identify priorities, and plan targeted improvements with you.','نعم. أراجع البنية والسلوك الحالي، وأحدد الأولويات، وأخطط معك لتحسينات محددة.')],
+[pair('Can you improve an existing product?','هل يمكن تحسين منتج قائم؟'),pair('Yes. We start by reviewing the architecture, user journeys, and current constraints. Then we agree on a focused improvement plan.','نعم. نبدأ بمراجعة البنية ورحلات المستخدم والقيود الحالية، ثم نتفق على خطة تحسين محددة.')],
 [pair('How are timelines and budgets decided?','كيف تُحدد المدة والميزانية؟'),pair('They depend on scope, integrations, design readiness, and delivery requirements. We agree on milestones and responsibilities after reviewing the project.','تعتمد على النطاق والتكاملات وجاهزية التصميم ومتطلبات التسليم. نتفق على المراحل والمسؤوليات بعد مراجعة المشروع.')],
-[pair('Will I work directly with you?','هل سأعمل معك مباشرة؟'),pair('Yes. This is an independent, founder-led studio. You work directly with me; any additional collaboration is discussed for your project.','نعم. هذا استوديو مستقل بقيادة مؤسسه. تعمل معي مباشرة، ونناقش أي تعاون إضافي يحتاجه مشروعك.')]
+[pair('Who will build our product?','من سيبني منتجنا؟'),pair('The studio is currently led and operated by its founder, Yousif. You have a direct engineering contact. Any additional collaborators and their responsibilities are discussed before the project begins.','يقود الاستوديو ويديره حاليًا مؤسسه يوسف. سيكون لديك تواصل تقني مباشر، ونناقش أي متعاونين إضافيين ومسؤولياتهم قبل بدء المشروع.')]
 ];
 let lang='en',filter='all',activeProject=null;
 const $=id=>document.getElementById(id),t=v=>v[lang],esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -46,21 +43,21 @@ function renderAll(){
  document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
  document.querySelectorAll('[data-en][data-ar]').forEach(el=>el.textContent=el.dataset[lang]);
  $('language').textContent=lang==='en'?'عربي':'EN';$('language').lang=lang==='en'?'ar':'en';$('language').ariaLabel=lang==='en'?'Switch to Arabic':'التبديل إلى الإنجليزية';
- document.title=lang==='en'?'Yousif Joseph | Software Studio & Portfolio':'يوسف جوزيف | استوديو برمجيات وأعمال';
+ document.title=lang==='en'?'Yousif Digital | Product Design & Software Engineering':'يوسف ديجيتال | تصميم المنتجات وهندسة البرمجيات';
  $('filters').ariaLabel=lang==='en'?'Filter projects':'تصفية المشاريع';$('close-dialog').ariaLabel=lang==='en'?'Close project details':'إغلاق تفاصيل المشروع';
  renderProjects();
  $('service-list').innerHTML=services.map(([title,desc,tags],i)=>`<article class="service-card"><span class="service-number">0${i+1}</span><h3>${esc(t(title))}</h3><p>${esc(t(desc))}</p><div class="tags">${tags.map(tag=>`<span>${esc(tag)}</span>`).join('')}</div></article>`).join('');
- $('experience').innerHTML=experience.map(([date,title,desc])=>`<article class="experience-item"><span class="date">${esc(t(date))}</span><h3>${esc(t(title))}</h3><p>${esc(t(desc))}</p></article>`).join('');
+
  $('process-list').innerHTML=processes.map(([title,desc],i)=>`<article class="process-card"><span>0${i+1}</span><h3>${esc(t(title))}</h3><p>${esc(t(desc))}</p></article>`).join('');
  $('lab-list').innerHTML=labs.map(([title,status,desc,type])=>`<article class="lab-card"><span class="lab-status">${esc(t(status))}</span><h3>${esc(t(title))}</h3><p>${esc(t(desc))}</p><div class="lab-type">${esc(t(type))}</div></article>`).join('');
  $('faq-list').innerHTML=faqs.map(([q,a])=>`<details><summary>${esc(t(q))}</summary><p>${esc(t(a))}</p></details>`).join('');
- if(activeProject)renderDialog(activeProject);updateThemeLabel();
+ if(activeProject)renderDialog(activeProject);updateThemeLabel();refreshMotion();
 }
 function renderDialog(p){
  const block=(title,body)=>`<div class="detail-block"><h3>${title}</h3>${body}</div>`;
- $('dialog-content').innerHTML=`<p class="dialog-kicker">${esc(t(p.type))} · ${esc(t(p.status))}</p><h2 id="dialog-title">${esc(t(p.title))}</h2><p>${esc(t(p.desc))}</p>${block(lang==='en'?'The challenge':'التحدي',`<p>${esc(t(p.problem))}</p>`)}${block(lang==='en'?'My role':'دوري',`<p>${esc(t(p.role))}</p>`)}${block(lang==='en'?'What the work covers':'ما يشمله العمل',`<ul>${p.features.map(f=>`<li>${esc(t(f))}</li>`).join('')}</ul>`)}${block(lang==='en'?'Technology & stage':'التقنيات والمرحلة',`<p dir="ltr">${esc(p.stack)}</p><p>${esc(t(p.note))}</p>`)}<a class="button secondary" href="${p.url}" target="_blank" rel="noopener noreferrer">${lang==='en'?'View repository on GitHub':'عرض المستودع على GitHub'}</a>`;
+ $('dialog-content').innerHTML=`<p class="dialog-kicker">${esc(t(p.type))} · ${esc(t(p.status))}</p><h2 id="dialog-title">${esc(t(p.title))}</h2><p>${esc(t(p.desc))}</p>${block(lang==='en'?'The challenge':'التحدي',`<p>${esc(t(p.problem))}</p>`)}${block(lang==='en'?'Engineering contribution':'المساهمة التقنية',`<p>${esc(t(p.role))}</p>`)}${block(lang==='en'?'What the work covers':'ما يشمله العمل',`<ul>${p.features.map(f=>`<li>${esc(t(f))}</li>`).join('')}</ul>`)}${block(lang==='en'?'Technology & stage':'التقنيات والمرحلة',`<p dir="ltr">${esc(p.stack)}</p><p>${esc(t(p.note))}</p>`)}<a class="button secondary" href="${p.url}" target="_blank" rel="noopener noreferrer">${lang==='en'?'View repository on GitHub':'عرض المستودع على GitHub'}</a>`;
 }
-$('filters').addEventListener('click',e=>{const b=e.target.closest('[data-filter]');if(!b)return;filter=b.dataset.filter;renderProjects();$('filters').querySelector(`[data-filter="${filter}"]`).focus()});
+$('filters').addEventListener('click',e=>{const b=e.target.closest('[data-filter]');if(!b)return;filter=b.dataset.filter;renderProjects();$('filters').querySelector(`[data-filter="${filter}"]`).focus();refreshMotion()});
 $('projects').addEventListener('click',e=>{const b=e.target.closest('[data-project]');if(!b)return;activeProject=projects.find(p=>p.id===b.dataset.project);renderDialog(activeProject);$('project-dialog').showModal();document.body.style.overflow='hidden'});
 $('close-dialog').addEventListener('click',()=>$('project-dialog').close());$('project-dialog').addEventListener('click',e=>{if(e.target===$('project-dialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close()}});$('project-dialog').addEventListener('close',()=>{activeProject=null;document.body.style.overflow=''});
 $('language').addEventListener('click',()=>{lang=lang==='en'?'ar':'en';writePref('portfolio-language',lang);$('copy-status').textContent='';renderAll()});
@@ -70,4 +67,20 @@ $('menu').addEventListener('click',()=>{const expanded=$('menu').getAttribute('a
 $('nav-links').addEventListener('click',e=>{if(e.target.closest('a')){$('menu').setAttribute('aria-expanded','false');$('nav-links').classList.remove('open')}});document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('menu').setAttribute('aria-expanded','false');$('nav-links').classList.remove('open')}});
 $('copy-email').addEventListener('click',async()=>{try{await navigator.clipboard.writeText('yousifkhalid544@gmail.com');$('copy-status').textContent=lang==='en'?'Email copied.':'تم نسخ البريد.'}catch{$('copy-status').textContent=lang==='en'?'Select the email above to copy it.':'حدد البريد أعلاه لنسخه.'}});
 $('contact-form').addEventListener('submit',e=>{e.preventDefault();const name=$('name').value.trim(),email=$('email').value.trim(),message=$('message').value.trim();if(!name||!message)return;const subject=lang==='en'?`Project enquiry from ${name}`:`استفسار مشروع من ${name}`;const body=`${name}\n${email}\n\n${message}`;window.location.href=`mailto:yousifkhalid544@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`});
+let revealObserver=null;
+const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+let motionPaused=readPref('studio-motion')==='off';
+function refreshMotion(){
+ const off=motionPaused||reducedMotion.matches;
+ document.documentElement.dataset.motion=off?'off':'on';
+ $('motion-toggle').textContent=lang==='en'?(off?'Enable motion':'Pause motion'):(off?'تفعيل الحركة':'إيقاف الحركة');
+ $('motion-toggle').setAttribute('aria-pressed',String(off));
+ if(revealObserver)revealObserver.disconnect();
+ if(off||!('IntersectionObserver' in window)){document.documentElement.classList.remove('motion-ready');return;}
+ document.documentElement.classList.add('motion-ready');
+ revealObserver=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');revealObserver.unobserve(entry.target)}})},{threshold:.08,rootMargin:'0px 0px -25px 0px'});
+ document.querySelectorAll('.heading,.impact-card,.service-card,.project-card,.process-card,.model-card,.company-grid,.lab-card,.faq>div,.contact-grid').forEach((el,i)=>{el.classList.add('reveal');el.style.setProperty('--reveal-delay',`${(i%3)*50}ms`);revealObserver.observe(el)});
+}
+$('motion-toggle').addEventListener('click',()=>{motionPaused=!motionPaused;writePref('studio-motion',motionPaused?'off':'on');refreshMotion()});
+reducedMotion.addEventListener('change',refreshMotion);
 lang=readPref('portfolio-language')==='ar'?'ar':'en';document.documentElement.dataset.theme=readPref('portfolio-theme')==='dark'?'dark':'light';renderAll();
