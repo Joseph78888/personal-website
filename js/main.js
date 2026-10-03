@@ -51,7 +51,6 @@ function renderProjects(){
  $('projects').innerHTML=projects.filter(p=>filter==='all'||p.category===filter).map(p=>caseStudy(p)).join('');
 }
 const L=(en,ar)=>lang==='en'?en:ar;
-const cell=(en,ar,bodyEn,bodyAr)=>`<div class="case-fact"><h4>${L(en,ar)}</h4><p>${L(bodyEn,bodyAr)}</p></div>`;
 const mockupDescriptions={
  noor:[pair('Customer shopping, vendor orders and Noor administration on three phones','التسوق وطلبات التجار وإدارة نور على ثلاثة هواتف'),pair('Product browsing and product details on two overlapping phones','تصفح المنتجات وتفاصيلها على هاتفين متداخلين'),pair('NOOR product detail and add-to-cart interface','تفاصيل منتج نور وإضافته إلى السلة'),pair('Cart and cash-on-delivery checkout','السلة وإتمام الطلب بالدفع عند الاستلام'),pair('Vendor order confirmation and preparation','تأكيد طلبات التاجر وتجهيزها'),pair('Noor delivery operations and ready orders','عمليات توصيل نور والطلبات الجاهزة'),pair('Customer profile, addresses and order history','ملف العميل والعناوين وسجل الطلبات')],
  crop:[pair('Leaf capture, analysis and history on three phones','التقاط الورقة والتحليل والسجل على ثلاثة هواتف'),pair('Leaf capture and analysis on two overlapping phones','التقاط الورقة وتحليلها على هاتفين متداخلين'),pair('Leaf classification results and confidence context','نتائج تصنيف الورقة وسياق الثقة'),pair('Previous leaf analysis history','سجل تحليلات الأوراق السابقة'),pair('Guidance for capturing a useful leaf photo','إرشادات تصوير الورقة بصورة مفيدة'),pair('Connected Crop Care AI assistant','مساعد Crop Care المتصل بالإنترنت'),pair('Crop Care profile and settings','الملف والإعدادات في Crop Care')],
@@ -63,13 +62,26 @@ function mockupFigure(p,i,hero=false){return `<figure class="mockup-frame ${hero
 const mockupGrid=(p,indices)=>`<div class="mockup-grid mockup-grid-${indices.length}">${indices.map(i=>mockupFigure(p,i)).join('')}</div>`;
 const mockupDisclosure=()=>L('Presentation mockups · illustrative interfaces','نماذج عرض · واجهات توضيحية');
 function caseStudy(p){
- const noor=p.id==='noor',crop=p.id==='crop';
- const headline=noor?L('One marketplace. Every part connected.','سوق واحد. وكل جزء مترابط.'):crop?L('Useful AI, right where it is needed.','ذكاء اصطناعي مفيد حيث تحتاجه.'):L('Turn local expertise into a trusted service.','حوّل الخبرة المحلية إلى خدمة موثوقة.');
- const visual=`<div class="case-mockup"><a href="#project/${p.id}" aria-label="${L('Explore','استكشف')} ${esc(t(p.title))}">${mockupFigure(p,0)}</a><p class="mockup-disclosure">${mockupDisclosure()}</p></div>`;
- let facts=noor?cell('For customers','للعملاء','Browse products and stores, save addresses, use coupons, and follow orders in Arabic or English.','تصفح المنتجات والمتاجر واحفظ العناوين واستخدم الكوبونات وتابع الطلبات بالعربية أو الإنجليزية.')+cell('For vendors','للتجار','Manage products and inventory, prepare incoming orders, and review delivered sales without exposing customer personal data.','أدر المنتجات والمخزون وجهّز الطلبات وراجع المبيعات المسلّمة دون كشف بيانات العملاء الشخصية.')+cell('For operations','للعمليات','A separate Windows and Android dashboard connects order control, delivery roles, categories, broadcasts, coupons, and analytics.','لوحة منفصلة لويندوز وأندرويد تربط إدارة الطلبات وأدوار التوصيل والفئات والإشعارات والكوبونات والتحليلات.'):crop?cell('A practical mobile journey','رحلة هاتف عملية','Capture or select a leaf image, review the result, revisit history, and get guidance on taking a useful photo.','التقط أو اختر صورة الورقة وراجع النتيجة والسجل واحصل على إرشادات لالتقاط صورة مفيدة.')+cell('AI on the device','ذكاء على الجهاز','MobileNetV2 processes 224 × 224 images through TensorFlow Lite. Classification runs locally; the separate AI assistant needs connectivity.','يعالج MobileNetV2 صورًا بحجم 224 × 224 عبر TensorFlow Lite. التصنيف محلي؛ والمساعد المنفصل يحتاج اتصالًا.')+cell('Confidence with context','ثقة مع سياق','A 0.79 confidence threshold supports an unknown result. This is an academic classifier, with model research contributed by the AI teammates.','عتبة ثقة 0.79 تدعم نتيجة غير معروفة. هذا مصنف أكاديمي؛ وقد شارك أعضاء فريق الذكاء الاصطناعي في بحث النموذج.'):cell('Customer clarity','وضوح للعميل','Search by service and location, add request photos, arrange a time, and confirm a price or inspection.','ابحث حسب الخدمة والموقع وأضف صور الطلب وحدد موعدًا واتفق على سعر أو معاينة.')+cell('Provider opportunity','فرص لمقدم الخدمة','The proposed provider mode brings together approval, availability, incoming requests, work history, and reviews.','يجمع وضع مقدم الخدمة المقترح الاعتماد والتوفر والطلبات الواردة وسجل العمل والتقييمات.')+cell('Operator oversight','إشراف الإدارة','A responsive dashboard is scoped for provider verification, categories, requests, notifications, and basic reports.','لوحة متجاوبة مخطط لها للتحقق من مقدمي الخدمة والفئات والطلبات والإشعارات والتقارير الأساسية.');
- const reason=noor?L('Building a commerce business takes more than a storefront. NOOR shows how we connect customer experience to the systems that keep orders moving.','بناء تجارة رقمية يحتاج أكثر من واجهة متجر. نور توضح كيف نربط تجربة العميل بالأنظمة التي تحرك الطلبات.'):crop?L('A trained model only becomes useful when people can use it. Crop Care demonstrates the bridge between AI research and a usable mobile product.','يصبح النموذج المدرب مفيدًا عندما يستطيع الناس استخدامه. Crop Care تربط البحث في الذكاء الاصطناعي بمنتج هاتف عملي.'):L('A marketplace needs clear rules before it needs more features. This work defines trust, responsibilities, and the service lifecycle before implementation.','يحتاج السوق لقواعد واضحة قبل المزيد من الميزات. يحدد هذا العمل الثقة والمسؤوليات ودورة الخدمة قبل التنفيذ.');
- const extra=noor?`<div class="delivery-note"><b>${L('Built for the local operating model','مبني لنموذج التشغيل المحلي')}</b><p>${L('Cash on delivery for the MVP. Noor manages delivery in-house. The first ordering rollout is scoped to Sinnar, with other cities planned later. Role-based access separates vendor preparation from delivery completion.','الدفع عند الاستلام للنسخة الأولى. نور تدير التوصيل داخليًا. يبدأ نطاق الطلبات بسنار مع التخطيط لمدن أخرى لاحقًا. تفصل الصلاحيات تجهيز التاجر عن إكمال التوصيل.')}</p></div>`:crop?`<div class="delivery-note"><b>${L('Reported model evaluation','تقييم النموذج المبلغ عنه')}</b><p>${L('F1 scores across six reported disease classes: 0.90–0.97. These are research evaluation results, not a promise of field accuracy.','قيم F1 لست فئات أمراض مبلغ عنها: 0.90–0.97. هذه نتائج تقييم بحثي وليست ضمانًا للدقة في الحقل.')}</p></div>`:'';
- return `<article id="case-${p.id}" class="project-card case-study ${noor?'case-featured':''}"><div class="case-heading"><div class="case-label"><span>${noor?'01':crop?'02':'03'} / ${esc(t(p.title))}</span><span>${esc(t(p.status))}</span></div><h3>${headline}</h3><p>${esc(t(p.desc))}</p></div><div class="case-stage">${visual}<div class="case-summary"><span class="eyebrow">${L('The business challenge','تحدي الأعمال')}</span><h4>${noor?L('Shopping is the beginning. Operations make it work.','التسوق هو البداية. التشغيل يجعله ممكنًا.'):crop?L('From an image to an informed next step.','من صورة إلى خطوة مدروسة.'):L('Trust at every step of the service.','الثقة في كل خطوة من الخدمة.')}</h4><p>${esc(t(p.problem))}</p><div class="case-scope"><b>${L('Scope','النطاق')}</b><span>${esc(p.stack)}</span></div><button class="button secondary" data-project="${p.id}">${L('Explore the full case study','استكشف دراسة المشروع الكاملة')}</button></div></div><div class="case-facts">${facts}</div>${extra}<div class="case-bottom"><p>${reason}</p><a href="#contact" class="button primary" data-enquiry="${p.id}">${noor?L('Build a connected platform','ابنِ منصة مترابطة'):crop?L('Bring AI into your product','أضف الذكاء إلى منتجك'):L('Plan your marketplace','خطط لسوقك')}</a></div></article>`;
+ const content={
+  noor:{category:pair('Commerce ecosystem','منظومة تجارة'),hook:pair('One marketplace. Every part connected.','سوق واحد. وكل جزء مترابط.'),tags:[pair('Customer app','تطبيق العملاء'),pair('Vendor workspace','مساحة التجار'),pair('Operations','العمليات')]},
+  crop:{category:pair('On-device AI','ذكاء على الجهاز'),hook:pair('A leaf image. A clearer next step.','صورة ورقة. خطوة قادمة أوضح.'),tags:[pair('Capture','التقاط'),pair('Local analysis','تحليل محلي'),pair('AI assistant','مساعد ذكي')]},
+  marketplace:{category:pair('Service marketplace','سوق خدمات'),hook:pair('Local expertise. One clear journey.','خبرة محلية. رحلة واضحة.'),tags:[pair('Discovery','اكتشاف'),pair('Job requests','طلبات العمل'),pair('Progress','متابعة التقدم')]}
+ }[p.id];
+ return `<article id="case-${p.id}" class="project-card visual-project ${p.id==='noor'?'visual-featured':''}"><a class="visual-project-image" href="#project/${p.id}" aria-label="${L('Explore','استكشف')} ${esc(t(p.title))}">${mockupImage(p,0)}<span class="visual-category">${esc(t(content.category))}</span></a><div class="visual-project-body"><div class="visual-project-title"><h3>${esc(t(p.title))}</h3><span class="project-stage">${esc(t(p.status))}</span></div><p>${esc(t(content.hook))}</p><div class="visual-project-bottom"><div class="project-capabilities">${content.tags.map(tag=>`<span>${esc(t(tag))}</span>`).join('')}</div><a href="#project/${p.id}" class="button primary">${L('View project','استعرض المشروع')}</a></div><small class="project-concept">${mockupDisclosure()}</small></div></article>`;
+}
+let carouselPaused=false;
+function renderCarousel(){
+ const sequence=projects.flatMap(p=>[0,1].map(i=>({p,i})));
+ const group=duplicate=>`<div class="carousel-group"${duplicate?' aria-hidden="true"':''}>${sequence.map(({p,i})=>`<a class="carousel-slide" href="#project/${p.id}"${duplicate?' tabindex="-1"':''}><div>${mockupImage(p,i)}</div><span><b>${esc(t(p.title))}</b><small>${esc(t(p.status))}</small></span></a>`).join('')}</div>`;
+ $('project-carousel-track').innerHTML=group(false)+group(true);
+ updateCarouselLabel();
+}
+function updateCarouselLabel(){
+ const off=motionPaused||reducedMotion.matches;
+ $('carousel-toggle').disabled=off;
+ $('carousel-toggle').textContent=off?L('Motion is off','الحركة متوقفة'):carouselPaused?L('Play carousel','تشغيل العرض'):L('Pause carousel','إيقاف العرض');
+ $('carousel-toggle').setAttribute('aria-pressed',String(carouselPaused));
+ $('project-carousel-track').dataset.paused=String(carouselPaused);
 }
 function renderAll(){
  document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
@@ -77,7 +89,7 @@ function renderAll(){
  $('language').textContent=lang==='en'?'عربي':'EN';$('language').lang=lang==='en'?'ar':'en';$('language').ariaLabel=lang==='en'?'Switch to Arabic':'التبديل إلى الإنجليزية';
  document.title=lang==='en'?'Yousif Digital | Product Design & Software Engineering':'يوسف ديجيتال | تصميم المنتجات وهندسة البرمجيات';
  $('filters').ariaLabel=lang==='en'?'Filter projects':'تصفية المشاريع';$('close-dialog').ariaLabel=lang==='en'?'Back to projects':'العودة للمشاريع';
- renderProjects();
+ renderProjects();renderCarousel();
  $('service-list').innerHTML=services.map(([title,desc,tags],i)=>`<article class="service-card"><span class="service-number">0${i+1}</span><h3>${esc(t(title))}</h3><p>${esc(t(desc))}</p><div class="tags">${tags.map(tag=>`<span>${esc(tag)}</span>`).join('')}</div></article>`).join('');
 
  $('process-list').innerHTML=processes.map(([title,desc],i)=>`<article class="process-card"><span>0${i+1}</span><h3>${esc(t(title))}</h3><p>${esc(t(desc))}</p></article>`).join('');
@@ -111,9 +123,10 @@ function syncProjectRoute(){
  else{document.title=lang==='en'?'Yousif Digital | Product Design & Software Engineering':'يوسف ديجيتال | تصميم المنتجات وهندسة البرمجيات';if(window.location.hash){const target=document.getElementById(window.location.hash.slice(1));if(target)target.scrollIntoView({behavior:'instant'});}}
 }
 window.addEventListener('hashchange',syncProjectRoute);
-document.querySelectorAll('.index-item').forEach(link=>link.addEventListener('click',()=>{if(filter!=='all'){filter='all';renderProjects();refreshMotion();}}));
+
 $('filters').addEventListener('click',e=>{const b=e.target.closest('[data-filter]');if(!b)return;filter=b.dataset.filter;renderProjects();$('filters').querySelector(`[data-filter="${filter}"]`).focus();refreshMotion()});
 $('projects').addEventListener('click',e=>{const b=e.target.closest('[data-project]');if(b)window.location.hash=`project/${b.dataset.project}`;});
+$('carousel-toggle').addEventListener('click',()=>{carouselPaused=!carouselPaused;updateCarouselLabel()});
 $('close-dialog').addEventListener('click',()=>{window.location.hash='work'});
 $('language').addEventListener('click',()=>{lang=lang==='en'?'ar':'en';writePref('portfolio-language',lang);$('copy-status').textContent='';renderAll()});
 function updateThemeLabel(){const dark=document.documentElement.dataset.theme==='dark';$('theme').ariaLabel=lang==='en'?(dark?'Switch to light theme':'Switch to dark theme'):(dark?'تفعيل المظهر الفاتح':'تفعيل المظهر الداكن')}
@@ -130,7 +143,7 @@ function refreshMotion(){
  const off=motionPaused||reducedMotion.matches;
  document.documentElement.dataset.motion=off?'off':'on';
  $('motion-toggle').textContent=lang==='en'?(off?'Enable motion':'Pause motion'):(off?'تفعيل الحركة':'إيقاف الحركة');
- $('motion-toggle').setAttribute('aria-pressed',String(off));
+ $('motion-toggle').setAttribute('aria-pressed',String(off));updateCarouselLabel();
  if(revealObserver)revealObserver.disconnect();
  if(off||!('IntersectionObserver' in window)){document.documentElement.classList.remove('motion-ready');return;}
  document.documentElement.classList.add('motion-ready');
